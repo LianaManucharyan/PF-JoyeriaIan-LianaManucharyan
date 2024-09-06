@@ -226,6 +226,16 @@ function anyadirProductoAlCarrito(evento) {
         // Borramos el LocalStorage
             localStorage.clear();
     };
+
+    //vaciar carrito al finalizar el form
+    function vaciarCarritoForm() {
+        // Limpiamos los productos guardados
+        carrito = [];
+        // Renderizamos los cambios
+        renderizarCarrito();
+        // Borramos el LocalStorage
+            localStorage.clear();
+    };
     
     function guardarCarritoEnLocalStorage () {
         miLocalStorage.setItem('carrito', JSON.stringify(carrito));
@@ -248,28 +258,28 @@ function anyadirProductoAlCarrito(evento) {
     renderizarCarrito();
 
     //botón y form para finalizar
-    document.getElementById('btnComprar').addEventListener('click', function() {
-        document.getElementById('formulario').style.display = 'block';
-    });
-
     document.getElementById('btnFinalizar').addEventListener('click', function() {
         const nombre = document.getElementById('nombre').value;
         const email = document.getElementById('email').value;
         const telefono = document.getElementById('telefono').value;
-
+    
         if (nombre && email) {
             Swal.fire({
                 title: 'Gracias por la compra',
                 text: `${nombre}. Recibirás dentro de poco en tu mail: ${email} y en tu teléfono: ${telefono} tus detalles de compra`,
                 icon: 'success',
+            }).then(() => {
+                // Limpiar el carrito
+                vaciarCarritoForm(); // Llámalo para vaciar el carrito
+    
+                // Ocultar el formulario
+                document.getElementById('formulario').style.display = 'none';
+    
+                // Limpiar los campos del formulario
+                document.getElementById('nombre').value = '';
+                document.getElementById('email').value = '';
+                document.getElementById('telefono').value = '';
             });
-
-            // Ocultar el formulario
-            document.getElementById('formulario').style.display = 'none';
-
-            // Limpiar los campos del formulario
-            document.getElementById('nombre').value = '';
-            document.getElementById('email').value = '';
         } else {
             Swal.fire({
                 title: 'Error',
