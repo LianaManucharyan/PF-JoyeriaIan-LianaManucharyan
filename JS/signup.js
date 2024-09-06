@@ -1,39 +1,35 @@
-    const signupForm = document.querySelector('#signupForm');
+const signupForm = document.querySelector('#signupForm');
 
-    if (signupForm) {
-        signupForm.addEventListener('submit', (e) => {
-            e.preventDefault();
+            signupForm.addEventListener('submit', (e) => {
+                e.preventDefault();
 
-            const name = document.querySelector('#name').value;
-            const email = document.querySelector('#email').value;
-            const password = document.querySelector('#password').value;
+                const name = document.querySelector('#name').value;
+                const email = document.querySelector('#email').value;
+                const password = document.querySelector('#password').value;
 
-            const Users = JSON.parse(localStorage.getItem('users')) || [];
-            const isUserRegistered = Users.find(user => user.email === email);
+                const users = JSON.parse(localStorage.getItem('users')) || [];
+                const isUserRegistered = users.find(user => user.email === email);
 
-            if (isUserRegistered) {
-                return Swal.fire({
-                    title: '¡Lo sentimos!',
-                    text: 'El usuario ingresado ya se encuentra registrado',
-                    icon: 'warning',
-                    iconColor: 'orange',
-                    confirmButtonText: 'Cerrar'
-                });
-            }
-
-            Users.push({ name: name, email: email, password: password });
-            localStorage.setItem('users', JSON.stringify(Users));
-
-            Swal.fire({
-                title: '¡Felicitaciones!',
-                text: 'Te has registrado con éxito',
-                icon: 'success',
-                iconColor: 'green',
-                confirmButtonText: 'Aceptar'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = '../PAGES/login.html'; 
+                if (isUserRegistered) {
+                    return Swal.fire({
+                        title: '¡Lo sentimos!',
+                        text: 'El usuario ingresado ya se encuentra registrado',
+                        icon: 'warning',
+                        confirmButtonText: 'Cerrar'
+                    });
                 }
+
+                users.push({ name, email, password });
+                localStorage.setItem('users', JSON.stringify(users));
+
+                Swal.fire({
+                    title: '¡Felicitaciones!',
+                    text: 'Te has registrado con éxito',
+                    icon: 'success',
+                    confirmButtonText: 'Aceptar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = 'login.html';
+                    }
+                });
             });
-        });
-    };

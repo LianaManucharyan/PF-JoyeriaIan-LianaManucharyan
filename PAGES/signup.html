@@ -8,7 +8,7 @@
         <meta name="author" content="Liana Manucharyan">
         <meta name="copyright" content="JY S.A.">
 <!--JS-->
-        <script defer src="./signup.html"></script>
+        <script defer src="../JS/signup.js"></script>
 <!--FONTS-->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap" rel="stylesheet">
@@ -44,30 +44,24 @@
             </button>
         </div>
     </div>
-    <div>
-        <h1 class="titulo-seccion signup">
-            Registrarse
-        </h1>
-    </div>
-    <div class="form" action="">
-        <form class="f-landing-page" id="signupForm">
-            <div>
-                <label for="name">Ingresa tu nombre de usuario</label>
-                <input type="text" class="form-control" id="name" required autofocus>
+    <div class="container"></div>
+        <h2 class="text-center mb-4">Crear Cuenta</h2>
+        <form id="signupForm">
+            <div class="mb-3">
+                <label for="name" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="name" required>
             </div>
-            <div>
-                <label for="email">Ingresa tu correo electrónico</label>
+            <div class="mb-3">
+                <label for="email" class="form-label">Correo Electrónico</label>
                 <input type="email" class="form-control" id="email" required>
             </div>
-            <div>
-                <label for="password">Ingresá tu contraseña</label>
+            <div class="mb-3">
+                <label for="password" class="form-label">Contraseña</label>
                 <input type="password" class="form-control" id="password" required>
             </div>
-            <div>
-                <button type="submit" class="btn btn-dark boton-form b1 bis">Registrarse</button>
-            </div>
+            <button type="submit" class="btn btn-primary w-100">Crear Cuenta</button>
+            <p class="text-center mt-3">¿Ya tienes una cuenta? <a href="./login.html">Iniciar sesión</a></p>
         </form>
-        <p class="leyenda-registro">¿Ya tienes cuenta de usuario en nuestro sitio? <a href="./login.html">Iniciar sesión</a></p>
     </div>
 <main>
 </header>
@@ -81,8 +75,6 @@
             <p class="text-white text-center">Copyright - 2024</p>
         </div>
         <!-- Fin de Logo y textos footer -->
-        <!-- Sección Sitio footer -->
-        <!-- Fin de Sección Sitio footer -->
         <!-- Sección Redes footer -->
         <ul class="contenedor__redes">
             <li class="contenedor__redes__ubi">

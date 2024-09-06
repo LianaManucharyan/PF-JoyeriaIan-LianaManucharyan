@@ -1,45 +1,61 @@
-if (!window.location.pathname.includes('login.html')) {
-    window.location.href = '../PAGES/login.html';
-}
-const loginForm = document.querySelector('#loginForm');
+    // Verificar si estamos en la página de inicio de sesión
+    if (window.location.pathname.includes('login.html')) {
+        const loginForm = document.querySelector('#loginForm');
 
-if (loginForm) {
-    loginForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        
-        const email = document.querySelector('#email').value;
-        const password = document.querySelector('#password').value;
+        if (loginForm) {
+            loginForm.addEventListener('submit', (e) => {
+                e.preventDefault();
 
-        try {
-            // Simula un retraso
-            await new Promise((resolve) => setTimeout(resolve, 1000));
+                try {
+                    // Obtener los valores del formulario
+                    const email = document.querySelector('#email').value;
+                    const password = document.querySelector('#password').value;
 
-            const users = JSON.parse(localStorage.getItem('users')) || [];
-            const validUser = users.find(user => user.email === email && user.password === password);
+                    // Obtener los usuarios desde localStorage
+                    const users = JSON.parse(localStorage.getItem('users')) || [];
+                    const validUser = users.find(user => user.email === email && user.password === password);
 
-            if (!validUser) {
-                throw new Error('Usuario y/o contraseña incorrectos');
-            }
+                    if (!validUser) {
+                        // Si el usuario no es válido, mostrar un mensaje de error
+                        Swal.fire({
+                            title: 'Error',
+                            text: 'Usuario y/o contraseña incorrectos',
+                            icon: 'error',
+                            confirmButtonText: 'Aceptar'
+                        });
+                        return;
+                    }
 
-            // Mostrar un mensaje de éxito y redirigir
-            await Swal.fire({
-                text: '¡Bienvenido! a Joyería Ian',
-                icon: 'success',
-                confirmButtonText: 'Aceptar'
-            });
+                    // Mostrar un mensaje de éxito y redirigir si el usuario es válido
+                    Swal.fire({
+                        text: '¡Bienvenido! a Joyería Ian',
+                        icon: 'success',
+                        confirmButtonText: 'Aceptar'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            localStorage.setItem('login_success', JSON.stringify(validUser));
+                            window.location.href = '../index.html';
+                        }
+                    });
 
-            // Guardar el estado del usuario en localStorage y redirigir
-            localStorage.setItem('login_success', JSON.stringify(validUser));
-            window.location.href = '../index.html';
-            
-        } catch (error) {
-            // Mostrar un mensaje de error
-            await Swal.fire({
-                title: 'Error',
-                text: error.message,
-                icon: 'error',
-                confirmButtonText: 'Aceptar'
-            });
-        }
-    });
-}
+                } catch (error) {
+                    // Manejar cualquier error que ocurra durante el proceso de inicio de sesión
+                    Swal.fire({
+                        title: 'Error',
+                        text: 'Hubo un problema con el inicio de sesión. Inténtalo de nuevo.',
+                        icon: 'error',
+                        confirmButtonText: 'Aceptar'
+                    });
+                    console.error('Error en el proceso de inicio de sesión:', error);
+                } finally {
+                    Swal.fire({
+                        text: '¡Bienvenido! a Joyería Ian',
+                        icon: 'success',
+                        confirmButtonText: 'Aceptar'
+                })
+            };
+    })};
+        } else {
+        // Redirigir si no estamos en la página de inicio de sesión
+        window.location.href = '../PAGES/login.html';
+    };

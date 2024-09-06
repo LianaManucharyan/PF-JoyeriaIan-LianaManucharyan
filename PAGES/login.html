@@ -8,7 +8,7 @@
         <meta name="author" content="Liana Manucharyan">
         <meta name="copyright" content="JY S.A.">
 <!--JS-->
-        <script defer src="../JS/main.js"></script>
+        <script defer src="../JS/login.js"></script>
 <!--FONTS-->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap" rel="stylesheet">
@@ -44,21 +44,21 @@
                 </button>
             </div>
         </div>
-        <div id="login-container">
-            <h1>Iniciar Sesión</h1>
+        <div class="container">
+            <h2 class="text-center mb-4">Iniciar Sesión</h2>
             <form id="loginForm">
-                <div>
-                    <label for="email">Correo electrónico</label>
-                    <input type="email" id="email" required autofocus>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Correo Electrónico</label>
+                    <input type="email" class="form-control" id="email" required>
                 </div>
-                <div>
-                    <label for="password">Contraseña</label>
-                    <input type="password" id="password" required>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Contraseña</label>
+                    <input type="password" class="form-control" id="password" required>
                 </div>
-                <button type="submit">Ingresar</button>
+                <button type="submit" class="btn btn-primary w-100">Iniciar Sesión</button>
+                <p class="text-center mt-3">¿No tienes una cuenta? <a href="./signup.html">Crear cuenta</a></p>
             </form>
-            <p class="leyenda-registro">¿No tienes cuenta de usuario en nuestro sitio? <a href="./signup.html">Crear una cuenta de usuario</a></p>
-        </div>
+        </div>    
     </main>
 <!--FIN DEL HEADER Y MAIN-->
 <!--COMIENZO DEL FOOTER-->
@@ -70,8 +70,6 @@
             <p class="text-white text-center">Copyright - 2024</p>
         </div>
         <!-- Fin de Logo y textos footer -->
-        <!-- Sección Sitio footer -->
-        <!-- Fin de Sección Sitio footer -->
         <!-- Sección Redes footer -->
         <ul class="contenedor__redes">
             <li class="contenedor__redes__ubi">
