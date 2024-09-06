@@ -30,7 +30,7 @@ if (loginForm) {
 
             // Guardar el estado del usuario en localStorage y redirigir
             localStorage.setItem('login_success', JSON.stringify(validUser));
-            window.location.href = 'index.html';
+            window.location.href = '../index.html';
             
         } catch (error) {
             // Mostrar un mensaje de error
