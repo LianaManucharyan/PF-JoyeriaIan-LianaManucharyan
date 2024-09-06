@@ -34,7 +34,7 @@
                     }).then((result) => {
                         if (result.isConfirmed) {
                             localStorage.setItem('login_success', JSON.stringify(validUser));
-                            window.location.href = '../index.html';
+                            window.location.href = 'index.html';
                         }
                     });
 
