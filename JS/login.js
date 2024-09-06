@@ -34,7 +34,8 @@
                     }).then((result) => {
                         if (result.isConfirmed) {
                             localStorage.setItem('login_success', JSON.stringify(validUser));
-                            window.location.href = 'index.html';
+                            // Asegúrate de que la ruta es correcta
+                            window.location.href = 'index.html'; // Ajusta la ruta si es necesario
                         }
                     });
 
@@ -46,16 +47,8 @@
                         icon: 'error',
                         confirmButtonText: 'Aceptar'
                     });
-                    console.error('Error en el proceso de inicio de sesión:', error);
-                } finally {
-                    Swal.fire({
-                        text: '¡Bienvenido! a Joyería Ian',
-                        icon: 'success',
-                        confirmButtonText: 'Aceptar'
-                })
-            };
-    })};
-        } else {
-        // Redirigir si no estamos en la página de inicio de sesión
-        window.location.href = '../PAGES/login.html';
+                }
+            });
+        }
     };
+
