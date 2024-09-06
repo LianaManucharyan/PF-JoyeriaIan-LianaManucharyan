@@ -116,25 +116,6 @@ footer {
         max-width: 100%;
         box-sizing: border-box;
 
-        .__logo {
-            align-items: center;
-            justify-content: center;
-            margin-left: -5px;
-            color: #ffffff;
-        }
-
-        .__sitios__ubi {
-            list-style-type: none;
-            display: flex;
-            flex-direction: row;
-        }
-
-        .contenedor__sitios__ubi__a {
-            font-family: Montserrat;
-            color: #ffffff;
-            list-style-type: none;
-        }
-
         .__redes__ubi {
             list-style-type: none;
             display: flex;
