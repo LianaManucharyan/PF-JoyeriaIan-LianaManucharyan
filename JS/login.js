@@ -1,7 +1,5 @@
 const loginForm = document.querySelector('#loginForm');
 
-window.location.href = '../PAGES/login.html'
-
     if (loginForm) {
         loginForm.addEventListener('submit', (e) => {
             e.preventDefault();
