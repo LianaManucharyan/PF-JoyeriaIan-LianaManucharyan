@@ -1,69 +1,19 @@
-// Variables
-const data = [
-    { id: 1, 
-        nombre: 'Aros Miranda Dorados', 
-        precio: 6000, 
-        imagen: './ASSETS/IMG/producto1Aros.jpg' },
-    { id: 2, 
-        nombre: 'Anillo Tabú Dorados', 
-        precio: 6000, 
-        imagen: './ASSETS/IMG/producto2Anillo.jpg' },
-    { id: 3, 
-        nombre: 'Aros Adá Dorados', 
-        precio: 7500, 
-        imagen: './ASSETS/IMG/producto3Aros.jpg' },
-    { id: 4, 
-        nombre: 'Aros Colgante Plateados', 
-        precio: 8000, 
-        imagen: './ASSETS/IMG/producto4Aros.jpg' },
-    { id: 5, 
-        nombre: 'Pulsera Cadena Dorada', 
-        precio: 6500, 
-        imagen: './ASSETS/IMG/producto5Pulsera.jpg' },
-    { id: 6, 
-        nombre: 'Aros Gota Dorados', 
-        precio: 4000, 
-        imagen: './ASSETS/IMG/producto6Aros.jpg' },
-    { id: 7, 
-        nombre: 'Collar Fino Dorado', 
-        precio: 4000, 
-        imagen: './ASSETS/IMG/producto7Collar.jpg' },
-    { id: 8, 
-        nombre: 'Pulsera Amistad Dorada', 
-        precio: 5000, 
-        imagen: './ASSETS/IMG/producto8Pulsera.jpg' },
-    { id: 9, 
-        nombre: 'Pulsera Circuitos Dorada', 
-        precio: 5000, 
-        imagen: './ASSETS/IMG/producto9Pulsera.jpg' },
-    { id: 10, 
-        nombre: 'Aros Perlas María', 
-        precio: 4000, 
-        imagen: './ASSETS/IMG/producto10Aros.jpg' },
-    { id: 11,
-        nombre: 'Aros Estefi Elegante', 
-        precio: 5500, 
-        imagen: './ASSETS/IMG/producto11Aros.jpg'},
-    { id: 12,
-        nombre: 'Pulsera Doble Dorada', 
-        precio: 5500, 
-        imagen: './ASSETS/IMG/producto12Pulsera.jpg'},
-];
-
 let carrito = [];
-            const divisa = '$';
-            const DOMitems = document.querySelector('#items');
-            const DOMcarrito = document.querySelector('#carrito');
-            const DOMtotal = document.querySelector('#total');
-            const DOMbotonVaciar = document.querySelector('#boton-vaciar');
-            const miLocalStorage = window.localStorage;
-    
-    // Dibujamos todos los productos a partir de la base de datos json
-    function renderizarProductos() {
-        fetch("./DB/data.json")
-        .then(response=>response.json())
-        .then(data=> {
-            data.forEach((info) => {
+const divisa = '$';
+const DOMitems = document.querySelector('#items');
+const DOMcarrito = document.querySelector('#carrito');
+const DOMtotal = document.querySelector('#total');
+const DOMbotonVaciar = document.querySelector('#boton-vaciar');
+const miLocalStorage = window.localStorage;
+let data = [];
+
+// Dibujamos todos los productos a partir de la base de datos json
+function renderizarProductos() {
+    fetch("./DB/data.json")
+        .then(response => response.json())
+        .then(jsonData => {
+            data = jsonData; // Guardamos los datos para usarlos en otras funciones
+            data.forEach(info => {
                 // Card
                 const miNodo = document.createElement('div');
                 miNodo.classList.add('card', 'col-sm-3');
@@ -97,9 +47,9 @@ let carrito = [];
                 DOMitems.appendChild(miNodo);
             });
         });
-    };
-    
-    // Evento para añadir un producto al carrito de compras
+}
+
+// Evento para añadir un producto al carrito de compras
 function anyadirProductoAlCarrito(evento) {
     try {
         // Intentar añadir el nodo al carrito
@@ -126,40 +76,26 @@ function anyadirProductoAlCarrito(evento) {
             icon: 'error',
             confirmButtonText: 'Aceptar'
         });
-    } finally {
-        // Código que siempre se ejecuta, haya o no habido un error
-        Swal.fire({
-            title: '¡Exelente!',
-            text: 'Intento de añadir producto al carrito finalizado.',
-            icon: 'sucess',
-            confirmButtonText: 'Aceptar'
-        });
     }
 }
 
-    
-    // Dibujamos los productos guardados en el carrito de compras
-    function renderizarCarrito() {
-        // Vaciamos todo el html
-        DOMcarrito.textContent = '';
-        // Quitamos los duplicados
-        const carritoSinDuplicados = [...new Set(carrito)];
-        // Generamos los nodos a partir del carrito
-        carritoSinDuplicados.forEach((item) => {
+// Dibujamos los productos guardados en el carrito de compras
+function renderizarCarrito() {
+    // Vaciamos todo el html
+    DOMcarrito.textContent = '';
+    // Quitamos los duplicados
+    const carritoSinDuplicados = [...new Set(carrito)];
+    // Generamos los nodos a partir del carrito
+    carritoSinDuplicados.forEach(item => {
         // Obtenemos el ítem que necesitamos de la variable "base de datos"
-        const miItem = data.filter((itemBaseDatos) => {
-         // Verificamos si coinciden los id
-            return itemBaseDatos.id === parseInt(item);
-            });
+        const miItem = data.find(itemBaseDatos => itemBaseDatos.id === parseInt(item));
+        if (!miItem) return; // Si el ítem no se encuentra en la base de datos, lo omitimos
         // Contamos las veces que se repite el producto
-        const numeroUnidadesItem = carrito.reduce((total, itemId) => {
-        // Si los id coinciden, incrementamos el contador
-            return itemId === item ? total += 1 : total;
-            }, 0);
+        const numeroUnidadesItem = carrito.reduce((total, itemId) => itemId === item ? total + 1 : total, 0);
         // Creamos el nodo del ítem del carrito
         const miNodo = document.createElement('li');
         miNodo.classList.add('list-group-item', 'text-right', 'mx-2');
-        miNodo.textContent = `${numeroUnidadesItem} x ${miItem[0].nombre} - ${miItem[0].precio}${divisa}`;
+        miNodo.textContent = `${numeroUnidadesItem} x ${miItem.nombre} - ${miItem.precio}${divisa}`;
         // Botón de eliminar producto del carrito
         const miBoton = document.createElement('button');
         miBoton.classList.add('btn', 'btn-dark', 'mx-5');
@@ -171,91 +107,85 @@ function anyadirProductoAlCarrito(evento) {
         // Mezclamos nodos
         miNodo.appendChild(miBoton);
         DOMcarrito.appendChild(miNodo);
-        });
-        // Renderizamos el precio total en el HTML
-        DOMtotal.textContent = calcularTotal();
-    };
-    
-    // Evento para eliminar un ítem del carrito
-    function borrarItemCarrito(evento) {
-        // Obtenemos el id del botón pulsado
-        const id = evento.target.dataset.item;
-        // Enviamos una alerta al usuario
-        Swal.fire({
-            title: '¡Atención!',
-            text: 'Acabas de eliminar un producto de tu carrito de compras',
-            icon: 'warning',
-            confirmButtonText: 'Aceptar'
-        });
-        // Borramos todos los productos
-        carrito = carrito.filter((carritoId) => {
-            return carritoId !== id;
-        });
-        // volvemos a renderizar
-        renderizarCarrito();
-        // Actualizamos el LocalStorage
-        guardarCarritoEnLocalStorage();
-    };
-    
-    // Calculamos el precio total de los productos añadidos al carrito
-    function calcularTotal() {
-        // Recorremos el array del carrito
-        return carrito.reduce((total, item) => {
-            // Obtenemos el precio de cada producto
-            const miItem = data.filter((itemBaseDatos) => {
-                return itemBaseDatos.id === parseInt(item);
-            });
-            // Sumamos el total
-            return total + miItem[0].precio;
-        }, 0).toFixed(2);
-    };
-    
-    // Vaciamos el carrito y lo volvemos a dibujar
-    function vaciarCarrito() {
-        // Limpiamos los productos guardados
-        carrito = [];
-        // Enviamos una alerta al usuario
-        Swal.fire({
-            title: '¡Atención!',
-            text: 'Acabas de vaciar tu carrito de compras',
-            icon: 'warning',
-            confirmButtonText: 'Aceptar'
-        });
-        // Renderizamos los cambios
-        renderizarCarrito();
-        // Borramos el LocalStorage
-            localStorage.clear();
-    };
+    });
+    // Renderizamos el precio total en el HTML
+    DOMtotal.textContent = `${calcularTotal()}${divisa}`;
+}
 
-    //vaciar carrito al finalizar el form
-    function vaciarCarritoForm() {
-        // Limpiamos los productos guardados
-        carrito = [];
-        // Renderizamos los cambios
-        renderizarCarrito();
-        // Borramos el LocalStorage
-            localStorage.clear();
-    };
-    
-    function guardarCarritoEnLocalStorage () {
-        miLocalStorage.setItem('carrito', JSON.stringify(carrito));
-    };
-    
-    function cargarCarritoDeLocalStorage () {
-        // ¿Existe algo guardado previamente en el LocalStorage?
-            if (miLocalStorage.getItem('carrito') !== null) {
-        // Cargamos la información
-                carrito = JSON.parse(miLocalStorage.getItem('carrito'));
-            };
-    };
-    
-    // Eventos
-    DOMbotonVaciar.addEventListener('click', vaciarCarrito);
-    
-    // Invocamos las funciones
-    cargarCarritoDeLocalStorage();
-    renderizarProductos();
+// Evento para eliminar un ítem del carrito
+function borrarItemCarrito(evento) {
+    // Obtenemos el id del botón pulsado
+    const id = evento.target.dataset.item;
+    // Enviamos una alerta al usuario
+    Swal.fire({
+        title: '¡Atención!',
+        text: 'Acabas de eliminar un producto de tu carrito de compras',
+        icon: 'warning',
+        confirmButtonText: 'Aceptar'
+    });
+    // Borramos todos los productos
+    carrito = carrito.filter(carritoId => carritoId !== id);
+    // volvemos a renderizar
     renderizarCarrito();
+    // Actualizamos el LocalStorage
+    guardarCarritoEnLocalStorage();
+}
+
+// Calculamos el precio total de los productos añadidos al carrito
+function calcularTotal() {
+    return carrito.reduce((total, item) => {
+        const miItem = data.find(itemBaseDatos => itemBaseDatos.id === parseInt(item));
+        return miItem ? total + miItem.precio : total;
+    }, 0).toFixed(2);
+}
+
+// Vaciamos el carrito y lo volvemos a dibujar
+function vaciarCarrito() {
+    // Limpiamos los productos guardados
+    carrito = [];
+    // Enviamos una alerta al usuario
+    Swal.fire({
+        title: '¡Atención!',
+        text: 'Acabas de vaciar tu carrito de compras',
+        icon: 'warning',
+        confirmButtonText: 'Aceptar'
+    });
+    // Renderizamos los cambios
+    renderizarCarrito();
+    // Borramos el LocalStorage
+    localStorage.clear();
+}
+
+// Vaciar carrito al finalizar el form
+function vaciarCarritoForm() {
+    // Limpiamos los productos guardados
+    carrito = [];
+    // Renderizamos los cambios
+    renderizarCarrito();
+    // Borramos el LocalStorage
+    localStorage.clear();
+}
+
+function guardarCarritoEnLocalStorage() {
+    miLocalStorage.setItem('carrito', JSON.stringify(carrito));
+}
+
+function cargarCarritoDeLocalStorage() {
+    // ¿Existe algo guardado previamente en el LocalStorage?
+    if (miLocalStorage.getItem('carrito') !== null) {
+        // Cargamos la información
+        carrito = JSON.parse(miLocalStorage.getItem('carrito'));
+    }
+}
+
+// Eventos
+DOMbotonVaciar.addEventListener('click', vaciarCarrito);
+
+// Invocamos las funciones
+cargarCarritoDeLocalStorage();
+renderizarProductos();
+renderizarCarrito();
+
 
     //botón y form para finalizar
     document.getElementById('btnFinalizar').addEventListener('click', function() {

@@ -1,5 +1,3 @@
-window.location.href = '../PAGES/login.html';
-
 const loginForm = document.querySelector('#loginForm');
 
     if (loginForm) {
