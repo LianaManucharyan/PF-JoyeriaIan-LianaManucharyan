@@ -1,6 +1,6 @@
-const loginForm = document.querySelector('#loginForm');
+window.location.href = '../PAGES/login.html';
 
-    window.location.href = '../PAGES/login.html';
+const loginForm = document.querySelector('#loginForm');
 
     if (loginForm) {
         loginForm.addEventListener('submit', (e) => {
