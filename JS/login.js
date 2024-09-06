@@ -35,7 +35,7 @@
                         if (result.isConfirmed) {
                             localStorage.setItem('login_success', JSON.stringify(validUser));
                             // Asegúrate de que la ruta es correcta
-                            window.location.href = 'index.html'; // Ajusta la ruta si es necesario
+                            window.location.href = '../index.html'; // Ajusta la ruta si es necesario
                         }
                     });
 
