@@ -50,8 +50,6 @@ const data = [
         imagen: './ASSETS/IMG/producto12Pulsera.jpg'},
 ];
 
-window.location.href = '/PAGES/login.html';
-
 let carrito = [];
             const divisa = '$';
             const DOMitems = document.querySelector('#items');
