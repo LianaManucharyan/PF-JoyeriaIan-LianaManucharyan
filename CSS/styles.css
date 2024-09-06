@@ -1,0 +1,150 @@
+header {
+    .container-fluid {
+        text-align: right;
+        text-decoration: none;
+        background-color: #ffffff;
+        padding: 25px;
+    }
+
+    .navbar-brand {
+        font-size: 35px;
+        color: #684e4e;
+        font-family:Major Mono Display;
+    }
+
+    .navbar-nav {
+        text-align: right;
+    }
+
+    .nav-link {
+        color: #000000;
+        font-family: Montserrat; 
+    }
+  }
+
+.product-card {
+    border: 1px solid #ddd; 
+    border-radius: 2px; 
+    padding: 10px; 
+    text-align: center; 
+}
+
+.cart-item{
+
+    p{
+        text-align: left;
+    }
+}
+
+h2{
+    font-family: Montserrat;
+    font-size: 20px;
+    color: #684e4e;
+}
+
+h1{
+    font-family: Major Mono Display;
+    text-align: center;
+}
+
+h5{
+    font-family: Major Mono Display;
+    text-align: center;
+    color: white;
+}
+
+button {
+    font-family: Montserrat;
+    font-size: 15px;
+    background-color: #684e4e;
+    color: white;
+    border-radius: 10px;
+}
+
+#boton-vaciar{
+    font-family: Montserrat;
+    background-color: white;
+    color: #684e4e;
+    border-radius: 10px;
+    border-color: #684e4e;
+}
+
+p{
+    text-align: center;
+}
+
+.bienvenidatienda {
+    display: flex;
+    flex-direction: row;
+    margin: 150px;
+}
+
+#formulario{
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 300px;
+    padding: 2em;
+    border: 3px solid #684e4e;
+    border-radius: 3em;
+    background-color: white;
+    box-sizing: border-box;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    justify-content: center;
+}
+
+.btn{
+    font-family: Montserrat;
+    background-color: white;
+    color: #684e4e;
+    border-radius: 10px;
+    border-color: #684e4e;
+    text-align: center;
+    justify-content: center;
+}
+
+footer {
+    background-color: #684e4e;
+    margin-top: 10px;
+    padding: 10px;
+
+    .contenedor{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        max-width: 100%;
+        box-sizing: border-box;
+
+        .__logo {
+            align-items: center;
+            justify-content: center;
+            margin-left: -5px;
+            color: #ffffff;
+        }
+
+        .__sitios__ubi {
+            list-style-type: none;
+            display: flex;
+            flex-direction: row;
+        }
+
+        .contenedor__sitios__ubi__a {
+            font-family: Montserrat;
+            color: #ffffff;
+            list-style-type: none;
+        }
+
+        .__redes__ubi {
+            list-style-type: none;
+            display: flex;
+            flex-direction: row;
+        }
+
+        .contenedor__redes__ubi__a {
+            font-family: Montserrat;
+            color: #ffffff;
+            list-style-type: none;
+        }
+    }
+  }
